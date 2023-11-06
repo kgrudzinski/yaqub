@@ -38,13 +38,13 @@ impl Table {
 impl fmt::Display for Table {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         const SEP: &str = ",\n";
-        write!(f, "CREATE TABLE {} IF NOT EXISTS (\n", self.name)?;       
+        writeln!(f, "CREATE TABLE {} IF NOT EXISTS (", self.name)?;       
         write!(f, "{}", fmt_array(&self.cols, SEP))?;
-        if self.checks.len() > 0 {
+        if !self.checks.is_empty() {
             write!(f, "{}", SEP)?;
         }
         write!(f, "{}", fmt_array(&self.checks, SEP))?;
-        if self.foreign_keys.len() > 0 {
+        if !self.foreign_keys.is_empty() {
             write!(f, "{}", SEP)?;
         }
         write!(f, "{}", fmt_array(&self.foreign_keys, SEP))?;
@@ -94,7 +94,7 @@ impl AlterTable {
 impl fmt::Display for AlterTable {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         const SEP: &str = "\n";
-        let len = self.cols.len() + self.renames.len() + self.cols.len() + if let Some(_) = self.new_name { 1 } else { 0 };
+        let len = self.cols.len() + self.renames.len() + self.cols.len() + if self.new_name.is_some() { 1 } else { 0 };
         let mut strings = Vec::with_capacity(len);
         if let Some(ref n) = self.new_name {
             strings.push(format!("ALTER TABLE {} RENAME TO {};", self.name, n));

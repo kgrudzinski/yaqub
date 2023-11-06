@@ -120,10 +120,7 @@ impl Column {
     }
 
     pub fn is_generated(&self) -> bool {
-        match self.generated {
-            Some(_) => true,
-            None => false
-        }
+        self.generated.is_some()
     }
 }
 

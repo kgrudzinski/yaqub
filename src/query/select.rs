@@ -223,12 +223,12 @@ impl fmt::Display for RawQuery {
         //limit
         if let Some(ref limit) = self.limit {
             sql.push_str(" LIMIT ");
-            sql.push_str(&limit);
+            sql.push_str(limit);
         }
         //offset
         if let Some(ref offset) = self.offset {
             sql.push_str(" OFFSET ");
-            sql.push_str(&offset);
+            sql.push_str(offset);
         }       
         write!(f, "{}", sql)
     }

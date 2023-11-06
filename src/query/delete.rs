@@ -9,7 +9,7 @@ struct RawDelete {
 impl fmt::Display for RawDelete {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "DELETE FROM {}", self.table)?;
-        if self.where_.len() > 0 {
+        if !self.where_.is_empty() {
             write!(f," WHERE {}", self.where_)?;
         }
         Ok(())

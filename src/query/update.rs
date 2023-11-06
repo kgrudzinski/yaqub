@@ -10,7 +10,7 @@ struct RawUpdate {
 impl fmt::Display for RawUpdate {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "UPDATE {} SET {}", self.table, self.data)?;
-        if self.where_.len() > 0 {
+        if !self.where_.is_empty() {
             write!(f," WHERE {}", self.where_)?;
         }
         Ok(())

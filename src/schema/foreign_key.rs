@@ -10,7 +10,7 @@ pub enum ForeignKeyAction {
 }
 
 impl ForeignKeyAction {
-    fn to_str(&self) -> &str {
+    fn as_str(&self) -> &str {
         match self {            
             Self::SetNull => "SET NULL",
             Self::SetDefault => "SET DEFAULT",
@@ -23,7 +23,7 @@ impl ForeignKeyAction {
 
 impl fmt::Display for ForeignKeyAction {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.to_str())
+        write!(f, "{}", self.as_str())
     }
 }
 
